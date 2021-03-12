@@ -28,7 +28,11 @@ namespace MyAuthRazor.Identity
         {
             services.AddDbContext<ApplicationDbContext>(configure =>
                 configure.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(configure =>
+            {
+                configure.Password.RequiredLength = 4;
+                configure.Password.RequireLowercase = true;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

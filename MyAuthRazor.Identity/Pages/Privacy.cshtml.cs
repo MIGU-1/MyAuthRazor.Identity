@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyAuthRazor.Identity.Pages
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;

@@ -28,18 +28,18 @@ namespace MyAuthRazor.Identity.Pages.Auth
         {
             if(ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(AuthUser.Email);
+                var user = await _userManager.FindByNameAsync(AuthUser.UserName);
                 if(user == null)
                 {
                     if (user != null)
                     {
-                        ModelState.AddModelError("AuthUser.Email", "Email existiert nicht");
+                        ModelState.AddModelError("AuthUser.UserName", "User existiert nicht");
                         return Page();
                     }
                 }
 
                 var signInResult = await _signInManager.PasswordSignInAsync(
-                    AuthUser.Email, AuthUser.Password, isPersistent: true, lockoutOnFailure: false);
+                    AuthUser.UserName, AuthUser.Password, isPersistent: false, lockoutOnFailure: false);
 
                 if(!signInResult.Succeeded)
                 {
